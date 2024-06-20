@@ -1,4 +1,4 @@
-_Support this and all my katas via [Patreon](https://www.patreon.com/EmilyBache)_
+_Support this and all of [Emily Bache](https://github.com/emilybache)'s katas via [Patreon](https://www.patreon.com/EmilyBache)_
 
 Theatrical Players Refactoring Kata
 ====================================
