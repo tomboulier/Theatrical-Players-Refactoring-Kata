@@ -29,13 +29,13 @@ def statement(invoice, plays):
         return result
 
     def volume_credits_for(a_performance):
-        volume_credits = 0
+        result = 0
         # add volume credits
-        volume_credits += max(a_performance['audience'] - 30, 0)
+        result += max(a_performance['audience'] - 30, 0)
         # add extra credit for every ten comedy attendees
         if "comedy" == play_for(a_performance)["type"]:
-            volume_credits += math.floor(a_performance['audience'] / 5)
-        return volume_credits
+            result += math.floor(a_performance['audience'] / 5)
+        return result
 
     for perf in invoice['performances']:
         volume_credits += volume_credits_for(perf)
