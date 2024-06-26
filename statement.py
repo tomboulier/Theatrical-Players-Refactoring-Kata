@@ -2,7 +2,6 @@ import math
 
 
 def statement(invoice, plays):
-    total_amount = 0
     result = f'Statement for {invoice["customer"]}\n'
 
     def usd(amount):
@@ -42,10 +41,17 @@ def statement(invoice, plays):
             volume_credits += volume_credits_for(perf)
         return volume_credits
 
+    def apple_sauce():
+        total_amount = 0
+        for perf in invoice['performances']:
+            total_amount += amount_for(perf)
+        return total_amount
+
     for perf in invoice['performances']:
         # print line for this order
         result += f' {play_for(perf)["name"]}: {usd(amount_for(perf))} ({perf["audience"]} seats)\n'
-        total_amount += amount_for(perf)
+
+    total_amount = apple_sauce()
 
     result += f'Amount owed is {usd(total_amount)}\n'
     result += f'You earned {total_volume_credits()} credits\n'
