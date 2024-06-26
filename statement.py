@@ -42,10 +42,10 @@ def statement(invoice, plays):
         return volume_credits
 
     def apple_sauce():
-        total_amount = 0
+        result = 0
         for perf in invoice['performances']:
-            total_amount += amount_for(perf)
-        return total_amount
+            result += amount_for(perf)
+        return result
 
     for perf in invoice['performances']:
         # print line for this order
