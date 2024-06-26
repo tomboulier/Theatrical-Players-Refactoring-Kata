@@ -9,22 +9,27 @@ def statement(invoice, plays):
     def format_as_dollars(amount):
         return f"${amount:0,.2f}"
 
+    def play_for(a_performance):
+        return plays[a_performance['playID']]
+
     for perf in invoice['performances']:
-        play = plays[perf['playID']]
-        this_amount = amount_for(perf, play)
+        this_amount = amount_for(perf, play_for(perf))
 
         # add volume credits
         volume_credits += max(perf['audience'] - 30, 0)
         # add extra credit for every ten comedy attendees
-        if "comedy" == play["type"]:
+        if "comedy" == play_for(perf)["type"]:
             volume_credits += math.floor(perf['audience'] / 5)
         # print line for this order
-        result += f' {play["name"]}: {format_as_dollars(this_amount/100)} ({perf["audience"]} seats)\n'
+        result += f' {play_for(perf)["name"]}: {format_as_dollars(this_amount/100)} ({perf["audience"]} seats)\n'
         total_amount += this_amount
 
     result += f'Amount owed is {format_as_dollars(total_amount/100)}\n'
     result += f'You earned {volume_credits} credits\n'
     return result
+
+
+
 
 
 def amount_for(a_performance, play):
