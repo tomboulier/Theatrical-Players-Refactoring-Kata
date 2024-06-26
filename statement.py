@@ -2,10 +2,11 @@ import math
 
 
 def statement(invoice, plays):
-    return render_plain_text(invoice, plays)
+    statement_data = {}
+    return render_plain_text(statement_data, invoice, plays)
 
 
-def render_plain_text(invoice, plays):
+def render_plain_text(data, invoice, plays):
     def usd(amount):
         return f"${amount / 100:0,.2f}"
 
