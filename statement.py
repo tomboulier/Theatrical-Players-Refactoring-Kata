@@ -3,16 +3,11 @@ import math
 
 def statement(invoice, plays):
     def total_volume_credits(data):
-        volume_credits = 0
-        for perf in data['performances']:
-            volume_credits += perf['volume_credits']
-        return volume_credits
+        return sum([perf['volume_credits'] for perf in data['performances']])
 
     def total_amount(data):
-        result = 0
-        for perf in data['performances']:
-            result += perf['amount']
-        return result
+        return sum([perf['amount'] for perf in data['performances']])
+
     def volume_credits_for(a_performance):
         result = 0
         # add volume credits
