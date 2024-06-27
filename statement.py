@@ -2,6 +2,15 @@ import math
 
 
 def statement(invoice, plays):
+    def volume_credits_for(a_performance):
+        result = 0
+        # add volume credits
+        result += max(a_performance['audience'] - 30, 0)
+        # add extra credit for every ten comedy attendees
+        if "comedy" == a_performance["play"]["type"]:
+            result += math.floor(a_performance['audience'] / 5)
+        return result
+
     def amount_for(a_performance):
         if a_performance["play"]['type'] == "tragedy":
             result = 40000
@@ -25,6 +34,7 @@ def statement(invoice, plays):
         result = a_performance.copy()
         result['play'] = play_for(result)
         result['amount'] = amount_for(result)
+        result['volume_credits'] = volume_credits_for(result)
         return result
 
     statement_data = {}
@@ -37,19 +47,10 @@ def render_plain_text(data, plays):
     def usd(amount):
         return f"${amount / 100:0,.2f}"
 
-    def volume_credits_for(a_performance):
-        result = 0
-        # add volume credits
-        result += max(a_performance['audience'] - 30, 0)
-        # add extra credit for every ten comedy attendees
-        if "comedy" == a_performance["play"]["type"]:
-            result += math.floor(a_performance['audience'] / 5)
-        return result
-
     def total_volume_credits():
         volume_credits = 0
         for perf in data['performances']:
-            volume_credits += volume_credits_for(perf)
+            volume_credits += perf['volume_credits']
         return volume_credits
 
     def total_amount():
