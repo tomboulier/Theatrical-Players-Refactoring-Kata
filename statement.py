@@ -1,14 +1,15 @@
 from create_statement_data import create_statement_data
 
 
+def usd(amount):
+    return f"${amount / 100:0,.2f}"
+
+
 def statement(invoice, plays):
     return render_plain_text(create_statement_data(invoice, plays))
 
 
 def render_plain_text(data):
-    def usd(amount):
-        return f"${amount / 100:0,.2f}"
-
     result = f'Statement for {data['customer']}\n'
     for perf in data['performances']:
         # print line for this order
