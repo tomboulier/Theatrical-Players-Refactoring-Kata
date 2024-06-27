@@ -5,10 +5,10 @@ def statement(invoice, plays):
     statement_data = {}
     statement_data['customer'] = invoice['customer']
     statement_data['performances'] = invoice['performances']
-    return render_plain_text(statement_data, invoice, plays)
+    return render_plain_text(statement_data, plays)
 
 
-def render_plain_text(data, invoice, plays):
+def render_plain_text(data, plays):
     def usd(amount):
         return f"${amount / 100:0,.2f}"
 
